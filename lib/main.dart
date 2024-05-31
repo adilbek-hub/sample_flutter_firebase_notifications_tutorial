@@ -4,16 +4,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/controllers/auth_service.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/controllers/notification_service.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/firebase_options.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/views/home_page.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/views/login_page.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/views/message.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/views/signup_page.dart';
+import 'package:notification_product/controllers/auth_service.dart';
+import 'package:notification_product/controllers/notification_service.dart';
+import 'package:notification_product/firebase_options.dart';
+import 'package:notification_product/views/home_page.dart';
+import 'package:notification_product/views/login_page.dart';
+import 'package:notification_product/views/message.dart';
+import 'package:notification_product/views/signup_page.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
-
 // function to listen to background changes
 Future _firebaseBackgroundMessage(RemoteMessage message) async {
   if (message.notification != null) {
@@ -21,7 +20,6 @@ Future _firebaseBackgroundMessage(RemoteMessage message) async {
   }
 }
 
-// to handle notification on foreground on web platform
 void showNotification({required String title, required String body}) {
   showDialog(
     context: navigatorKey.currentContext!,
@@ -33,7 +31,7 @@ void showNotification({required String title, required String body}) {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Ok"))
+            child: const Text("Ok"))
       ],
     ),
   );
@@ -89,7 +87,7 @@ void main() async {
 
   if (message != null) {
     print("Launched from terminated state");
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       navigatorKey.currentState!.pushNamed("/message", arguments: message);
     });
   }
@@ -126,11 +124,11 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: navigatorKey,
       routes: {
-        "/": (context) => CheckUser(),
-        "/signup": (context) => SignUpPage(),
-        "/login": (context) => LoginPage(),
-        "/home": (context) => HomePage(),
-        "/message": (context) => Message()
+        "/": (context) => const CheckUser(),
+        "/signup": (context) => const SignUpPage(),
+        "/login": (context) => const LoginPage(),
+        "/home": (context) => const HomePage(),
+        "/message": (context) => const Message()
       },
     );
   }

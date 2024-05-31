@@ -1,9 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/controllers/auth_service.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/controllers/crud_service.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/main.dart';
+import 'package:notification_product/controllers/auth_service.dart';
+import 'package:notification_product/controllers/crud_service.dart';
+import 'package:notification_product/main.dart';
 
 class PushNotifications {
   static final _firebaseMessaging = FirebaseMessaging.instance;
@@ -44,7 +44,7 @@ class PushNotifications {
       print("failed to get device token");
       if (maxRetires > 0) {
         print("try after 10 sec");
-        await Future.delayed(Duration(seconds: 10));
+        await Future.delayed(const Duration(seconds: 10));
         return getDeviceToken(maxRetires: maxRetires - 1);
       } else {
         return null;
@@ -56,13 +56,13 @@ class PushNotifications {
     bool isUserLoggedin = await AuthService.isLoggedIn();
     print("User is logged in $isUserLoggedin");
     if (isUserLoggedin) {
-      await CRUDService.saveUserToken(token!);
+      await CRUDService.saveUserToken(token);
       print("save to firestore");
     }
     // also save if token changes
     _firebaseMessaging.onTokenRefresh.listen((event) async {
       if (isUserLoggedin) {
-        await CRUDService.saveUserToken(token!);
+        await CRUDService.saveUserToken(token);
         print("save to firestore");
       }
     });
@@ -77,9 +77,9 @@ class PushNotifications {
     );
     final DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
-      onDidReceiveLocalNotification: (id, title, body, payload) => null,
+      onDidReceiveLocalNotification: (id, title, body, payload) {},
     );
-    final LinuxInitializationSettings initializationSettingsLinux =
+    const LinuxInitializationSettings initializationSettingsLinux =
         LinuxInitializationSettings(defaultActionName: 'Open notification');
     final InitializationSettings initializationSettings =
         InitializationSettings(

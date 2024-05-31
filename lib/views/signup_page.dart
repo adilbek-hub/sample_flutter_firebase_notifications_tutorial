@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/controllers/auth_service.dart';
+import 'package:notification_product/controllers/auth_service.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -21,32 +21,32 @@ class _SignUpPageState extends State<SignUpPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Sign Up",
               style: TextStyle(fontWeight: FontWeight.w800, fontSize: 30),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFormField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text("Email"),
                   hintText: "Enter you email"),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextFormField(
               obscureText: true,
               controller: passwordController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text("Password"),
                   hintText: "Enter you password"),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SizedBox(
@@ -59,35 +59,35 @@ class _SignUpPageState extends State<SignUpPage> {
                         .then((value) {
                       if (value == "Account Created") {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Account Created")));
+                            const SnackBar(content: Text("Account Created")));
                         Navigator.pushNamedAndRemoveUntil(
                             context, "/home", (route) => false);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
                             value,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                           backgroundColor: Colors.red.shade400,
                         ));
                       }
                     });
                   },
-                  child: Text("Sign Up")),
+                  child: const Text("Sign Up")),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Already have an account?"),
+                const Text("Already have an account?"),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("Login")),
+                    child: const Text("Login")),
               ],
             ),
           ],

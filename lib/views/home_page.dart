@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/controllers/auth_service.dart';
-import 'package:sample_flutter_firebase_notifications_tutorial/controllers/notification_service.dart';
+import 'package:notification_product/controllers/auth_service.dart';
+import 'package:notification_product/controllers/notification_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,14 +20,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: const Text("Home"),
         actions: [
           IconButton(
               onPressed: () async {
                 await AuthService.logout();
                 Navigator.pushReplacementNamed(context, '/login');
               },
-              icon: Icon(Icons.logout))
+              icon: const Icon(Icons.logout))
         ],
       ),
     );
